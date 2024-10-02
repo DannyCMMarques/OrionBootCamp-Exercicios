@@ -32,7 +32,7 @@ let lista: PessoasImportantes[] = [
 
       //paradigma funcional
       const identificandoBioFunc = (id: number) => {
-        if (!!lista.find((item) => item.id === id) == false) {
+        if (!!lista.find((item) => item.id === id) === false) {
           return "ID inválido";
         }
         const bioSelecionada = lista
@@ -44,7 +44,7 @@ let lista: PessoasImportantes[] = [
 
         // paradigma imperativo
         const identificandoBioImp = (id: number) => {
-          if (!!lista.find((item) => item.id === id) == false) {
+          if (!!lista.find((item) => item.id === id) === false) {
             return "ID inválido";
           }
           for (let index = 0; index < lista.length; index++) {
@@ -59,7 +59,7 @@ let lista: PessoasImportantes[] = [
       //paradigma funcional
 
       const identificandoNome = (id: number) => {
-        if (!!lista.find((item) => item.id === id) == false) {
+        if (!!lista.find((item) => item.id === id) === false) {
           return "ID inválido";
         }
         const nomeSelecionado = lista
@@ -71,7 +71,7 @@ let lista: PessoasImportantes[] = [
 
       //paradigma imperativo
       const identificandoNomeImper = (id: number) => {
-        if (!!lista.find((item) => item.id === id) == false) {
+        if (!!lista.find((item) => item.id === id) === false) {
           return "ID inválido";
         }
         for (let index = 0; index < lista.length; index++) {
@@ -86,7 +86,7 @@ let lista: PessoasImportantes[] = [
 
       //paradigma imperativo
       const apagarItem = (id: number) => {
-        if (!!lista.find((item) => item.id === id) == false) {
+        if (!!lista.find((item) => item.id === id) === false) {
           return "ID inválido";
         }
         lista.splice(id - 1, 1);
@@ -94,7 +94,7 @@ let lista: PessoasImportantes[] = [
       };
       //paradigma funcional
       const eliminarItem = (id: number) => {
-        if (!!lista.find((item) => item.id === id) == false) {
+        if (!!lista.find((item) => item.id === id) === false) {
           return "ID inválido";
         }
         const novoArray = lista.filter((item) => item.id !== id);
@@ -105,19 +105,13 @@ let lista: PessoasImportantes[] = [
 
       //paradigma funcional
 
-      const alterarBioNome = (id: number, itemAlterado: string, novoConteudo: string) => {
-        if (!!lista.find((item) => item.id === id) == false) {
+      const alterarBioNome = (id: number, itemAlterado: 'bio' | 'nome', novoConteudo: string) => {
+        if (!!lista.find((item) => item.id === id) === false) {
           return "ID inválido";
         }
-        let bioName = itemAlterado.toLowerCase();
-        if (bioName === "nome") bioName = "name";
-        if (bioName !== "bio" && bioName !== "name") {
-          return "Altere somente bio ou nome";
-        }
-
         const novaLista = lista.map((lista) => {
           if (lista.id === id) {
-            if (bioName === "bio") {
+            if (itemAlterado === "bio") {
               lista.bio = novoConteudo;
               return lista;
             } else {
@@ -131,17 +125,12 @@ let lista: PessoasImportantes[] = [
 
       // paradigma imperativo
 
-      const alterarBioNomeImp = (id: number, itemAlterado: string, novoConteudo: string) => {
-        if (!!lista.find((item) => item.id === id) == false) {
+      const alterarBioNomeImp = (id: number,  itemAlterado: 'bio' | 'nome', novoConteudo: string) => {
+        if (!!lista.find((item) => item.id === id) === false) {
           return "ID inválido";
         }
         let index = lista.findIndex((item) => item.id === id);
-        let bioName = itemAlterado.toLowerCase();
-        if (bioName === "nome") bioName = "name";
-        if (bioName !== "bio" && bioName !== "name") {
-          return "Altere somente bio ou nome";
-        }
-        lista[index][bioName] = novoConteudo;
+        lista[index][itemAlterado] = novoConteudo;
         return lista;
       };
 // e) Crie uma função que retorne a lista ordenada pelo nome dos itens
