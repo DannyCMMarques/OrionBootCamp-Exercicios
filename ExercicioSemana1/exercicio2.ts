@@ -19,6 +19,7 @@ let lista: PessoasImportantes[] = [
   {
     id: 3,
     name: "Nikola Tesla",
+
     bio: "Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada.",
   },
   {
@@ -89,8 +90,10 @@ let lista: PessoasImportantes[] = [
         if (!!lista.find((item) => item.id === id) === false) {
           return "ID inválido";
         }
-        lista.splice(id - 1, 1);
-        return lista;
+          const ID:any= lista.find((item) => item.id === id)
+            const index = lista.indexOf(ID);
+            lista.splice(index, 1);
+            return lista;
       };
       //paradigma funcional
       const eliminarItem = (id: number) => {

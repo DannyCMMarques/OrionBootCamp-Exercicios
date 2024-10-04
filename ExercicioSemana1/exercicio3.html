@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulário</title>
+    <style>
+        body {
+            font-family: "Arial", sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+
+        .opcao1,
+        .opcao2,
+        .opcao3 {
+            width: 25%;
+        }
+
+        .sessao2,
+        .sessao1 {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 400px;
+            width: 85%;
+            margin: 15px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        input[type="text"],
+        .input2 {
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #4caf50;
+            outline: none;
+        }
+
+        .input2:focus {
+            border-color: #1909ee;
+            outline: none;
+        }
+
+        .input3:focus {
+            border-color: #ff4500;
+            outline: none;
+        }
+
+        button,
+        .opcao1 {
+            padding: 12px;
+            font-size: 16px;
+            background-color: #45a049;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover,
+        .opcao1:hover {
+            background-color: #4caf50;
+        }
+
+        .button1,
+        .opcao2 {
+            background-color: #1068b4;
+            width: 33%;
+        }
+
+        .button1:hover,
+        .opcao2:hover {
+            background-color: #1909ee;
+        }
+
+        .button3,
+        .opcao3 {
+            background-color: #ff4500;
+            color: white;
+        }
+
+        .button3:hover,
+        .opcao3:hover {
+            background-color: #ff8c00;
+
+            color: white;
+        }
+
+        .resultado {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #317d35;
+            text-align: center;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .buttonOrdenar {
+            background-color: red;
+            color: white;
+        }
+
+        .buttonOrdenar:hover {
+            background-color: lightcoral;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sessao1">
+        <button id="opcao1" class="opcao1">Opção 1</button>
+        <button id="opcao2" class="opcao2">Opção 2</button>
+        <button id="opcao3" class="opcao3">Opção 3</button>
+    </div>
+    <div class="sessao2">
+        <div id="card1" class="container">
+            <h1>Calcule a quantidade de vogais</h1>
+            <form id="form">
+                <label for="palavra">Insira uma palavra:</label>
+                <input type="text" id="palavra" placeholder="Digite uma palavra" required />
+                <button class="button" type="submit">Calcular</button>
+            </form>
+            <div class="resultado" id="resultado"></div>
+        </div>
+
+        <div id="cardLista" class="hidden">
+            <h1>Lista de Personalidades</h1>
+
+            <div id="cartaoExibicao"></div>
+            <div class="sessao1">
+                <button id="buttonOrdenar" class="buttonOrdenar">
+                    Ordenar por Nome
+                </button>
+            </div>
+        </div>
+        <div id="card2" class="hidden">
+            <h1>Conheça algumas personalidades famosas:</h1>
+            <form id="form1">
+                <label for="palavra">Insira o ID:</label>
+                <input class="input2" type="number" id="ID" placeholder="Insira um id" required />
+                <div style="
+              display: flex;
+              justify-content: space-around;
+              align-items: center;
+            ">
+                    <button class="button1" id="nome" type="button">Ver
+                        Nome</button>
+                    <button class="button1" id="bio" type="button">Ver
+                        Bio</button>
+
+                    <button class="button1" id="apagar" type="button">
+                        Apagar Item
+                    </button>
+                </div>
+            </form>
+            <div class="resultado" id="resultado2"></div>
+        </div>
+        <div id="card3" class="hidden">
+            <h1>Altere a Bio ou Nome da Lista</h1>
+            <form id="form3">
+                <label for="IDAlterar">Insira o ID:</label>
+                <input type="text" id="IDAlterar" placeholder="Digite um ID" required />
+
+                <label for="itemAlterado">Insira a categoria que deseja
+                    alterar:</label>
+                <input type="text" id="itemAlterado" placeholder="Digite bio ou nome:" required />
+
+                <label for="novoConteudo">Insira o novo conteudo:</label>
+                <input type="text" id="novoConteudo" placeholder="Insira o novo conteudo" required />
+
+                <button class="button3" id="alterarButton" type="button">
+                    Alterar Item
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module">
+
+        document.getElementById('opcao1').addEventListener('click', () => {
+            document.getElementById('card1').classList.remove('hidden');
+            document.getElementById('card2').classList.add('hidden');
+            document.getElementById('card3').classList.add('hidden');
+            document.getElementById('cardLista').classList.add('hidden');
+
+        });
+
+        document.getElementById('opcao2').addEventListener('click', () => {
+            document.getElementById('card1').classList.add('hidden');
+            document.getElementById('card2').classList.remove('hidden');
+            document.getElementById('card2').classList.add('container');
+            document.getElementById('cardLista').classList.add('hidden');
+            document.getElementById('card3').classList.add('hidden');
+        });
+
+        document.getElementById('opcao3').addEventListener('click', () => {
+            document.getElementById('card1').classList.add('hidden');
+            document.getElementById('card3').classList.remove('hidden');
+            document.getElementById('cardLista').classList.remove('hidden');
+
+            document.getElementById('card2').classList.add('hidden');
+            document.getElementById('card3').classList.add('container');
+            document.getElementById('cardLista').classList.add('container');
+
+
+        });
+
+        import { lista } from './exercicio2.js'
+        import { contadorDeVogais } from './exercicio1.js'
+        import { identificandoBioImp } from './exercicio2.js'
+        import { identificandoNomeImper } from './exercicio2.js'
+        import { alterarBioNomeImp } from './exercicio2.js'
+        import { apagarItem } from './exercicio2.js'
+
+        const onSubmit = (event) => {
+            event.preventDefault();
+            const form = document.getElementById('form');
+            const palavra = (form.querySelector('#palavra')).value;
+            const resultado = contadorDeVogais(palavra);
+            const divResultado = document.getElementById('resultado');
+            divResultado.textContent = resultado;
+            form.reset();
+        }
+        const form = document.getElementById('form');
+        form.addEventListener('submit', onSubmit)
+
+        const handleNomeClick = (event) => {
+            event.preventDefault();
+            const form = document.getElementById('form1');
+            const ID = parseInt((form.querySelector('#ID')).value, 10);
+            const resultado = identificandoNomeImper(ID);
+            const divResultado = document.getElementById('resultado2');
+            divResultado.textContent = resultado;
+            form.reset();
+        }
+
+        const handleBioClick = (event) => {
+            event.preventDefault();
+            const form = document.getElementById('form1');
+            const ID = parseInt((form.querySelector('#ID')).value, 10);
+            const resultado = identificandoBioImp(ID);
+            const divResultado = document.getElementById('resultado2');
+            divResultado.textContent = resultado;
+            form.reset();
+        }
+
+        const nomeBotao = document.getElementById('nome');
+        const bioBotao = document.getElementById('bio');
+        nomeBotao.addEventListener('click', handleNomeClick);
+        bioBotao.addEventListener('click', handleBioClick);
+
+        const exibirLista = () => {
+            const divLista = document.getElementById('cartaoExibicao');
+            divLista.innerHTML = `${lista.map(item => `<p>${item.id}. ${item.name}: ${item.bio}</p>`).join("")}`;
+        };
+        exibirLista();
+
+        const ordenarLista = () => {
+            lista.sort((a, b) => a.name.localeCompare(b.name));
+            exibirLista();
+        };
+
+        const ordenarBotao = document.getElementById('buttonOrdenar');
+        ordenarBotao.addEventListener('click', ordenarLista);
+
+        const onSubmitAlteracao = () => {
+            const form = document.getElementById('form3');
+            const ID = parseInt((form.querySelector('#IDAlterar')).value, 10);
+            const itemAlterado = (form.querySelector('#itemAlterado')).value.toLowerCase();
+            const novoConteudo = (form.querySelector('#novoConteudo')).value;
+            exibirLista();
+        };
+
+        const alterarBotao = document.getElementById('alterarButton')
+        alterarBotao.addEventListener('click', onSubmitAlteracao);
+
+        const handleApagar = (event) => {
+            event.preventDefault();
+            const form = document.getElementById('form1');
+            const ID = parseInt((form.querySelector('#ID')).value, 10);
+            apagarItem(ID);
+            const divResultado = document.getElementById('resultado2');
+            divResultado.textContent = "Item" + " " + ID + " " + "apagado com sucesso.";
+            exibirLista();
+            form.reset();
+        }
+
+        const apagarBotao = document.getElementById('apagar');
+        apagarBotao.addEventListener('click', handleApagar);
+    </script>
+</body>
+
+</html>

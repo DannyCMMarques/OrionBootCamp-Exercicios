@@ -57,16 +57,15 @@ console.log(contadorDeVogais("Amêndoas"));
 
 // simulando uma função ligada ao botão de Submit
 
-const onSubmit = (data: any) => {
-  const palavra = data.palavra.value;
-  const resultado: string = contadorDeVogais(palavra);
-  console.log(11, resultado);
-};
+   const onSubmit = (event: Event) => {
+            event.preventDefault();
+            const data = event.target as HTMLFormElement;
+            const palavra = (data.querySelector('#palavra') as HTMLInputElement).value;
+            const resultado = contadorDeVogais(palavra);
+            const divResultado = document.getElementById('resultado') as HTMLDivElement;
 
-// Testes
+            divResultado.textContent = resultado;
+            data.reset();
+        }
 
-onSubmit({
-  palavra: {
-    value: "Amanhã",
-  },
-});
+
