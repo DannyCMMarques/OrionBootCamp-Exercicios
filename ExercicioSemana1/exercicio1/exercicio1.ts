@@ -1,15 +1,13 @@
 //1 - Criar uma função que retorne a quantidade de vogais da palavra passada.
-type VogalQuantidade = {
-  vogais: string | undefined;
-  quantidade: number;
-};
 
-const contadorDeVogais = (palavra: string): string => {
-  let frase = "";
-  if (palavra == undefined || null) return (frase = "Insira uma palavra.");
+
+const contadorDeVogais = (palavra: string): number | string => {
+  let quantidade: number= 0;
+
+  if (palavra === undefined || palavra === null) return "Insira uma palavra.";
 
   const arrayVogais: string[] = ["a", "e", "i", "o", "u"];
-  const quantidadeVogais: VogalQuantidade[] = [];
+  const quantidadeVogais: number[] = [];
 
   const palavraPadronizada = palavra
     .normalize("NFD")
@@ -18,36 +16,24 @@ const contadorDeVogais = (palavra: string): string => {
   const arrayLetras = palavraPadronizada.split("");
 
   for (let i = 0; i < arrayVogais.length; i++) {
-    const vogais = arrayVogais[i];
+    const vogal = arrayVogais[i];
     const filtrarVogais = arrayLetras.filter(
-      (letras) => !letras.toLowerCase().localeCompare(vogais)
+      (letra) => !letra.toLowerCase().localeCompare(vogal)
     );
-    if (filtrarVogais.length !== 0) {
-      quantidadeVogais.push({
-        vogais: filtrarVogais.shift(),
-        quantidade: filtrarVogais.length + 1,
-      });
-    }
-  }
-  if (quantidadeVogais.length !== 0) {
-    const vogaisEQuantidade = quantidadeVogais.map((item) => {
-      return `Possui ${item.quantidade} ${item.quantidade > 1 ? "letras" : "letra"
-        } ${item.vogais ?? ''.toUpperCase()}`;
-    });
 
-    if (vogaisEQuantidade.length > 1) {
-      frase =
-        vogaisEQuantidade.slice(0, -1).join(", ") +
-        " e " +
-        vogaisEQuantidade[vogaisEQuantidade.length - 1] +
-        ".";
-    } else {
-      frase = vogaisEQuantidade[0] + ".";
+    if (filtrarVogais.length !== 0) {
+      quantidadeVogais.push(filtrarVogais.length);
     }
-  } else {
-    frase = "A palavra não possui vogais.";
   }
-  return frase;
+
+  if (quantidadeVogais.length > 0) {
+    quantidade = quantidadeVogais.reduce((acc, item) => acc + (item || 0), 0);
+  } else if (quantidadeVogais.length === 1) {
+    quantidade = quantidadeVogais[0];
+    quantidade = 0;
+  }
+
+  return quantidade;
 };
 //a) Dar um exemplo de uso com uma palavra recebida via parâmetro da função.
 

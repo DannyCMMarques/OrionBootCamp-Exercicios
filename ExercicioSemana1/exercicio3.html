@@ -16,8 +16,11 @@
 
         .opcao1,
         .opcao2,
-        .opcao3 {
+        .opcao3,
+        .opcao4 {
             width: 25%;
+            margin-right: 5px;
+            margin-left: 5px;
         }
 
         .sessao2,
@@ -26,6 +29,10 @@
             justify-content: space-around;
             align-items: center;
             margin-top: 40px;
+        }
+
+        .sessao1 {
+            gap: 15px;
         }
 
         .container {
@@ -101,7 +108,6 @@
         .button1,
         .opcao2 {
             background-color: #1068b4;
-            width: 33%;
         }
 
         .button1:hover,
@@ -120,6 +126,15 @@
             background-color: #ff8c00;
 
             color: white;
+        }
+
+        .opcao4 {
+            background-color: #ae00ff;
+            color: white;
+        }
+
+        .opcao4:hover {
+            background-color: #c662f5;
         }
 
         .resultado {
@@ -141,6 +156,12 @@
         .buttonOrdenar:hover {
             background-color: lightcoral;
         }
+
+        .exibirCommit {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
     </style>
 </head>
 
@@ -149,6 +170,7 @@
         <button id="opcao1" class="opcao1">Opção 1</button>
         <button id="opcao2" class="opcao2">Opção 2</button>
         <button id="opcao3" class="opcao3">Opção 3</button>
+        <button id="opcao4" class="opcao4">Exibir Commits</button>
     </div>
     <div class="sessao2">
         <div id="card1" class="container">
@@ -211,6 +233,9 @@
                 </button>
             </form>
         </div>
+        <div id="exibirCommit" class="hidden">
+
+        </div>
     </div>
 
     <script type="module">
@@ -220,6 +245,9 @@
             document.getElementById('card2').classList.add('hidden');
             document.getElementById('card3').classList.add('hidden');
             document.getElementById('cardLista').classList.add('hidden');
+            document.getElementById('exibirCommit').classList.add('hidden');
+            document.getElementById('exibirCommit').classList.remove('exibirCommit');
+
 
         });
 
@@ -229,32 +257,60 @@
             document.getElementById('card2').classList.add('container');
             document.getElementById('cardLista').classList.add('hidden');
             document.getElementById('card3').classList.add('hidden');
+            document.getElementById('exibirCommit').classList.add('hidden');
+            document.getElementById('exibirCommit').classList.remove('exibirCommit');
+
+
         });
 
         document.getElementById('opcao3').addEventListener('click', () => {
             document.getElementById('card1').classList.add('hidden');
             document.getElementById('card3').classList.remove('hidden');
             document.getElementById('cardLista').classList.remove('hidden');
-
             document.getElementById('card2').classList.add('hidden');
             document.getElementById('card3').classList.add('container');
             document.getElementById('cardLista').classList.add('container');
-
-
+            document.getElementById('exibirCommit').classList.add('hidden');
+            document.getElementById('exibirCommit').classList.remove('exibirCommit');
+        });
+        document.getElementById('opcao4').addEventListener('click', () => {
+            document.getElementById('card1').classList.add('hidden');
+            document.getElementById('card3').classList.remove('hidden');
+            document.getElementById('cardLista').classList.remove('hidden');
+            document.getElementById('card2').classList.add('hidden');
+            document.getElementById('card3').classList.add('hidden');
+            document.getElementById('cardLista').classList.add('hidden');
+            document.getElementById('exibirCommit').classList.add('exibirCommit');
+            exibirCommit();
         });
 
-        import { lista } from './exercicio2.js'
-        import { contadorDeVogais } from './exercicio1.js'
-        import { identificandoBioImp } from './exercicio2.js'
-        import { identificandoNomeImper } from './exercicio2.js'
-        import { alterarBioNomeImp } from './exercicio2.js'
-        import { apagarItem } from './exercicio2.js'
+        import { lista } from './exercicio2/arrayLista.js'
+        import { contadorDeVogais } from './exercicio1/exercicio1.js'
+        import { identificandoBioImp } from './exercicio2/exercicio2.js'
+        import { identificandoNomeImper } from './exercicio2/exercicio2.js'
+        import { alterarBioNomeImp } from './exercicio2/exercicio2.js'
+        import { apagarItem } from './exercicio2/exercicio2.js'
+        import { getData } from './service/serviceApiGithub.js'
+
+
+        const exibirCommit = async () => {
+            const divExibirCommit = document.getElementById('exibirCommit');
+            const arrayCommits = await getData('https://api.github.com/repos/DannyCMMarques/OrionBootCamp-Exercicios/commits');
+            divExibirCommit.innerHTML = arrayCommits.map(commit => `
+      <div class="container">
+        <img src="${commit.avatarUrl}" alt="${commit.authorName} avatar" style="width: 50px; height: 50px; border-radius: 50%;" />
+        <p><strong>Autor:</strong> ${commit.authorName}</p>
+        <p><strong>Data:</strong> ${new Date(commit.commitDate).toLocaleDateString()}</p>
+        <p><strong>Mensagem:</strong> ${commit.commitMessage}</p>
+      </div>
+    `)
+        };
 
         const onSubmit = (event) => {
             event.preventDefault();
             const form = document.getElementById('form');
             const palavra = (form.querySelector('#palavra')).value;
-            const resultado = contadorDeVogais(palavra);
+            const resultado = contadorDeVogais(palavra) + " " + "vogais.";
             const divResultado = document.getElementById('resultado');
             divResultado.textContent = resultado;
             form.reset();
