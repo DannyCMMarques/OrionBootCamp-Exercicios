@@ -32,8 +32,11 @@ export var lista = [
     bio: "Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar.",
   },
 ];
+
 // a) Crie uma função que retorne a bio do id passado
+
 //paradigma funcional
+
 export var identificandoBioFunc = function (id) {
   if (
     !!lista.find(function (item) {
@@ -52,7 +55,9 @@ export var identificandoBioFunc = function (id) {
     .shift();
   return bioSelecionada;
 };
+
 // paradigma imperativo
+
 export var identificandoBioImp = function (id) {
   if (
     !!lista.find(function (item) {
@@ -67,8 +72,11 @@ export var identificandoBioImp = function (id) {
     }
   }
 };
+
 // b) Crie uma função que retorne o name do id passado
+
 //paradigma funcional
+
 export var identificandoNome = function (id) {
   if (
     !!lista.find(function (item) {
@@ -103,8 +111,11 @@ export var identificandoNomeImper = function (id) {
     }
   }
 };
+
 // c) Crie uma função que apague um item da lista a partir de um id passado
+
 //paradigma imperativo
+
 export var apagarItem = function (id) {
   if (
     !!lista.find(function (item) {
@@ -118,7 +129,9 @@ export var apagarItem = function (id) {
   lista.splice(index, 1);
   return lista;
 };
+
 //paradigma funcional
+
 var eliminarItem = function (id) {
   if (
     !!lista.find(function (item) {
@@ -132,8 +145,11 @@ var eliminarItem = function (id) {
   });
   return novoArray;
 };
+
 // d) Crie uma função que altere a bio ou o name a partir de um id passado
+
 //paradigma funcional
+
 var alterarBioNome = function (id, itemAlterado, novoConteudo) {
   if (
     !!lista.find(function (item) {
@@ -155,7 +171,9 @@ var alterarBioNome = function (id, itemAlterado, novoConteudo) {
   });
   return novaLista;
 };
+
 // paradigma imperativo
+
 export var alterarBioNomeImp = function (id, itemAlterado, novoConteudo) {
   if (
     !!lista.find(function (item) {
@@ -172,31 +190,23 @@ export var alterarBioNomeImp = function (id, itemAlterado, novoConteudo) {
   lista[index][alteracao] = novoConteudo;
   return lista;
 };
+
 // e) Crie uma função que retorne a lista ordenada pelo nome dos itens
+
 // paradigma imperativo
+
 export var ordenarLista = function () {
   lista.sort(function (a, b) {
     return a.name.localeCompare(b.name);
   });
   return lista;
 };
+
 //paradigma funcional
+
 var ordenarListaFuncional = function () {
   var novoArrayOrdenado = __spreadArray([], lista, true).sort(function (a, b) {
     return a.name.localeCompare(b.name);
   });
   return novoArrayOrdenado;
 };
-//console.log para demonstrar as funções
-//console para testar as funções:
-// console.log(identificandoBioFunc(2));
-// console.log(identificandoBioImp(2));
-// console.log(identificandoNome(2));
-// console.log(identificandoNomeImper(2));
-// console.log(apagarItem(2));
-// console.log(eliminarItem(1));
-// console.log(alterarBioNome(4, "nome", "Jane"));
-// console.log(alterarBioNomeImp(4, "nome", "Jane"));
-// console.log(ordenarLista());
-// console.log(ordenarListaFuncional());
-// // f) Demonstre todas as funções com o paradigma funcional e com o imperativo
