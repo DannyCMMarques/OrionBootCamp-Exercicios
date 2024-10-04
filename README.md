@@ -1,6 +1,11 @@
 # 🚀 OrionBootCamp-Exercicios
 
-## Exercício 2
+## Semana01
+
+###Exercio 1 
+#### Criar uma função que retorne a quantidade de vogais da palavra passada.
+
+###Exercício 2
 
  #### A) Crie uma função que retorne a bio do id passado
 
