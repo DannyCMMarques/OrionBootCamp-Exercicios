@@ -40,8 +40,10 @@ export const alterarBioNomeImp = (id, itemAlterado, novoConteudo) => {
   if (!!lista.find((item) => item.id === id) === false) {
     return "ID inválido";
   }
+  let alterar = itemAlterado;
+  if (alterar === "nome") alterar = "name";
   const index = lista.findIndex((item) => item.id === id);
-  lista[index][itemAlterado] = novoConteudo;
+  lista[index][alterar] = novoConteudo;
   return lista;
 };
 

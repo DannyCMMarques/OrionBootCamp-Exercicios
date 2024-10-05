@@ -362,6 +362,7 @@
             const ID = parseInt((form.querySelector('#IDAlterar')).value, 10);
             const itemAlterado = (form.querySelector('#itemAlterado')).value.toLowerCase();
             const novoConteudo = (form.querySelector('#novoConteudo')).value;
+            const alterar = alterarBioNomeImp(ID, itemAlterado, novoConteudo);
             exibirLista();
         };
 
